@@ -6,7 +6,7 @@ import numpy as np  # For numerical operations, reshaping, and flattening images
 import os  # To check file paths (not used actively in this script)
 
 # Load the Haar Cascade face detection model
-faceDetect = cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml')
+faceDetect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 # Load label names from a pickle file (list of names corresponding to face data)
 with open('data/names.pkl', 'rb') as f:

@@ -4,19 +4,18 @@ import numpy as np  # Import NumPy for handling arrays and numerical operations
 import os  # Import OS module for interacting with the file system
 import sys  # Import sys for accessing command-line arguments
 
-# Load the Haar Cascade face detection model from a file
-faceDetect = cv2.CascadeClassifier('Data/haarcascade_frontalface_default.xml')
+# 📌 FIX: Build full absolute path to cascade XML file
+cascade_path = os.path.join(os.path.dirname(__file__), 'haarcascade_frontalface_default.xml')  # Resolve correct path
+faceDetect = cv2.CascadeClassifier(cascade_path)  # Load the Haar Cascade face detection model
+
+# ✅ Safety check to make sure the classifier was loaded
+if faceDetect.empty():
+    raise IOError(f"❌ Failed to load Haar cascade from: {cascade_path}")
 
 faces_data = []  # Initialize an empty list to store collected face images
 
+name = input("Enter your name:")  # Prompt user to enter their name
 
-if len(sys.argv) < 2:
-    print("❌ Please provide a name like: python add_Faces.py John")
-    sys.exit(1)
-
-name = sys.argv[1]
-
-# So, if Flask runs python add_Faces.py John, this line stores "John" in the name variable
 i = 0  # Initialize frame counter used to control the frequency of saving images
 
 # Define a function to open a camera using its index
